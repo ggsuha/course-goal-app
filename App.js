@@ -7,6 +7,7 @@ import {
   TextInput,
   View,
 } from "react-native";
+import GoalItem from "./components/GoalItem";
 
 export default function App() {
   const [goalInput, setGoalInput] = useState("");
@@ -37,11 +38,7 @@ export default function App() {
             return index;
           }}
           renderItem={(info) => {
-            return (
-              <View style={styles.goalView}>
-                <Text style={styles.goalText}>{info.item}</Text>
-              </View>
-            );
+            return <GoalItem text={info.item} />;
           }}
         />
       </View>
@@ -72,14 +69,5 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     width: "70%",
     paddingHorizontal: 5,
-  },
-  goalView: {
-    backgroundColor: "gray",
-    margin: 5,
-    padding: 5,
-    borderRadius: 5,
-  },
-  goalText: {
-    color: "white",
   },
 });
