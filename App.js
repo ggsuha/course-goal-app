@@ -10,6 +10,12 @@ export default function App() {
     setTotalGoal((currentTotalGoal) => [...currentTotalGoal, goalInput]);
   }
 
+  function removeGoal(id) {
+    setTotalGoal((currentTotalGoal) => {
+      return currentTotalGoal.filter((goal, index) => index != id);
+    });
+  }
+
   return (
     <View style={styles.appContainer}>
       <GoalInput onAddGoal={addGoal} />
@@ -20,7 +26,13 @@ export default function App() {
             return index;
           }}
           renderItem={(info) => {
-            return <GoalItem text={info.item} />;
+            return (
+              <GoalItem
+                text={info.item}
+                id={info.index}
+                onDelete={removeGoal}
+              />
+            );
           }}
         />
       </View>
