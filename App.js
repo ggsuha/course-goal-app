@@ -1,3 +1,4 @@
+import { StatusBar } from "expo-status-bar";
 import { useState } from "react";
 import { Button, FlatList, StyleSheet, View } from "react-native";
 import GoalInput from "./components/GoalInput";
@@ -27,33 +28,36 @@ export default function App() {
   }
 
   return (
-    <View style={styles.appContainer}>
-      <Button title="Add New Goal" onPress={showModal}></Button>
-      {modalVisible && (
-        <GoalInput
-          visible={modalVisible}
-          onAddGoal={addGoal}
-          onCloseModal={closeModal}
-        />
-      )}
-      <View style={styles.goalsContainer}>
-        <FlatList
-          data={totalGoal}
-          keyExtractor={(item, index) => {
-            return index;
-          }}
-          renderItem={(info) => {
-            return (
-              <GoalItem
-                text={info.item}
-                id={info.index}
-                onDelete={removeGoal}
-              />
-            );
-          }}
-        />
+    <>
+      <StatusBar style="auto" />
+      <View style={styles.appContainer}>
+        <Button title="Add New Goal" onPress={showModal}></Button>
+        {modalVisible && (
+          <GoalInput
+            visible={modalVisible}
+            onAddGoal={addGoal}
+            onCloseModal={closeModal}
+          />
+        )}
+        <View style={styles.goalsContainer}>
+          <FlatList
+            data={totalGoal}
+            keyExtractor={(item, index) => {
+              return index;
+            }}
+            renderItem={(info) => {
+              return (
+                <GoalItem
+                  text={info.item}
+                  id={info.index}
+                  onDelete={removeGoal}
+                />
+              );
+            }}
+          />
+        </View>
       </View>
-    </View>
+    </>
   );
 }
 
