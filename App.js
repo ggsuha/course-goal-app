@@ -11,6 +11,10 @@ export default function App() {
     setModalVisible(true);
   }
 
+  function closeModal() {
+    setModalVisible(false);
+  }
+
   function addGoal(goalInput) {
     setTotalGoal((currentTotalGoal) => [...currentTotalGoal, goalInput]);
     setModalVisible(false);
@@ -25,7 +29,13 @@ export default function App() {
   return (
     <View style={styles.appContainer}>
       <Button title="Add New Goal" onPress={showModal}></Button>
-      {modalVisible && <GoalInput visible={modalVisible} onAddGoal={addGoal} />}
+      {modalVisible && (
+        <GoalInput
+          visible={modalVisible}
+          onAddGoal={addGoal}
+          onCloseModal={closeModal}
+        />
+      )}
       <View style={styles.goalsContainer}>
         <FlatList
           data={totalGoal}
